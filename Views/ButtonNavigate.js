@@ -1,40 +1,36 @@
 
 import { StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
+
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
 
-const Stack = createStackNavigator();
+const MusicRoute = () => <Text>Music</Text>;
 
+const AlbumsRoute = () => <Text>Albums</Text>;
 
-import Home from "./Views/Home";
-
-const HomeRoute = () =>  <Stack.Screen name="Home" component={Home} />
-
+const RecentsRoute = () => <Text>Recents</Text>;
 export default function App() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'Home', title: 'Home', icon: 'queue-Home' },
-    ,
+    { key: 'music', title: 'Music', icon: 'queue-music' },
+    { key: 'albums', title: 'Albums', icon: 'album' },
+    { key: 'recents', title: 'Recents', icon: 'history' },
   ]);
   const renderScene = BottomNavigation.SceneMap({
-    Home: HomeRoute,
+    music: MusicRoute,
+    albums: AlbumsRoute,
+    recents: RecentsRoute,
   });
   return (
     
     <PaperProvider>
-        <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
       <BottomNavigation
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
-      />
-      </Stack.Navigator>
-      </NavigationContainer>
+    />
     </PaperProvider>
   );
 }
